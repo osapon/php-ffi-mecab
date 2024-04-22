@@ -26,7 +26,11 @@ class Tagger
         if ($argc === 0) {
             $this->mecab = $this->libmecab->mecab_new2('');
         } else {
-            $argv = FFI::new(FFI::arrayType(FFI::type('char *'), [$argc]));
+            if(PHP_VERSION_ID >= 80300) {
+                $argv = $this->libmecab->new(FFI::arrayType($this->libmecab->type('char *'), [$argc]));
+            } else {
+                $argv = FFI::new(FFI::arrayType(FFI::type('char *'), [$argc]));
+            }
             $args = array_values($args);
             for ($i = 0; $i < $argc; $i++) {
                 $argv[$i] = Util::toCString($args[$i], false);
