@@ -9,8 +9,8 @@ class LifetimeTest extends MeCabBaseTestCase
      */
     private function createTaggerForLifetime(): TaggerForLifetime
     {
-        $libmecabPath = getenv('LIBMECAB_PATH');
-        $ipadicDir = getenv('MECAB_IPADIC_UTF8_DIR');
+        $libmecabPath = $_ENV['LIBMECAB_PATH'];
+        $ipadicDir = $_ENV['MECAB_IPADIC_UTF8_DIR'];
         if (empty($ipadicDir)) {
             // デフォルトのrcfileの内容で初期化
             return new TaggerForLifetime($libmecabPath);

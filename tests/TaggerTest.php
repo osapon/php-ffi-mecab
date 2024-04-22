@@ -19,7 +19,7 @@ class TaggerTest extends MeCabBaseTestCase
     {
         $this->expectException(RuntimeException::class);
 
-        new Tagger(getenv('LIBMECAB_PATH'), ['-r', '', '-d', __FILE__]);
+        new Tagger($_ENV['LIBMECAB_PATH'], ['-r', '', '-d', __FILE__]);
     }
 
     public function testVersion(): void

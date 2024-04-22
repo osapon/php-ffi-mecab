@@ -12,7 +12,7 @@ abstract class MeCabBaseTestCase extends TestCase
     {
         parent::setUpBeforeClass();
 
-        $libmecabPath = getenv('LIBMECAB_PATH');
+        $libmecabPath = $_ENV['LIBMECAB_PATH'];
         if (empty($libmecabPath)) {
             static::markTestSkipped('environmental variable $LIBMECAB_PATH is not set');
         }
@@ -20,7 +20,7 @@ abstract class MeCabBaseTestCase extends TestCase
             static::markTestSkipped('file $LIBMECAB_PATH does not exist');
         }
 
-        $ipadicDir = getenv('MECAB_IPADIC_UTF8_DIR');
+        $ipadicDir = $_ENV['MECAB_IPADIC_UTF8_DIR'];
         if (!empty($ipadicDir) && !is_dir($ipadicDir)) {
             static::markTestSkipped('directory $MECAB_IPADIC_UTF8_DIR does not exist');
         }
@@ -28,8 +28,8 @@ abstract class MeCabBaseTestCase extends TestCase
 
     protected function createMeCab(): MeCab
     {
-        $libmecabPath = getenv('LIBMECAB_PATH');
-        $ipadicDir = getenv('MECAB_IPADIC_UTF8_DIR');
+        $libmecabPath = $_ENV['LIBMECAB_PATH'];
+        $ipadicDir = $_ENV['MECAB_IPADIC_UTF8_DIR'];
         if (empty($ipadicDir)) {
             // デフォルトのrcfileの内容で初期化
             return new MeCab($libmecabPath);
@@ -41,8 +41,8 @@ abstract class MeCabBaseTestCase extends TestCase
 
     protected function createTagger(): Tagger
     {
-        $libmecabPath = getenv('LIBMECAB_PATH');
-        $ipadicDir = getenv('MECAB_IPADIC_UTF8_DIR');
+        $libmecabPath = $_ENV['LIBMECAB_PATH'];
+        $ipadicDir = $_ENV['MECAB_IPADIC_UTF8_DIR'];
         if (empty($ipadicDir)) {
             // デフォルトのrcfileの内容で初期化
             return new Tagger($libmecabPath);
